@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: Bookshop App
+  description: Bookshop application
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8090/'
+paths:
+  {}
+components:
+  schemas:
+    BookTitleDto:
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        publisher:
+          type: string
+        year:
+          type: int
+        category:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryEnum'
+        copies:
+            $ref: '#/components/schemas/AvailableCopiesDto'
+    CategoryEnum:
+      enum:
+        - ACTION
+        - ADVENTURE
+        - BIOGRAPHY
+        - CLASSIC
+        - COOKBOOK
+        - CRIMINAL
+        - DETECTIVE
+        - DRAMA
+        - EDUCATION
+        - ESSEY
+        - FANTASY
+        - GRAPHIC_NOVEL
+        - HISTORICAL
+        - HORROR
+        - MYSTERY
+        - POETRY
+        - ROMANCE
+        - SCIENCE_FICTION
+        - THRILLER
+    CopyDto:
+      type: object
+      properties:
+        titleId:
+          type: string
+          format: uuid
+        bookBinding:
+          $ref: '#/components/schemas/BookBinding'
+    BookBinding:
+      enum:
+        - PAPERBACK
+        - HARD_BACK
+    AvailableCopiesDto:
+      type: object
+      properties:
+        paperback:
+          $ref: '#/components/schemas/AvailableCopyDto'
+        hardback:
+          $ref: '#/components/schemas/AvailableCopyDto'
+    AvailableCopyDto:
+      type: object
+      properties:
+        numberOfCopy:
+          type: integer
+          format: int64
+        price:
+          type: number
+
+  
